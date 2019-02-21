@@ -20,6 +20,8 @@ List<DateTime> presentDates = [
   DateTime(2019, 2, 10),
   DateTime(2019, 2, 11),
   DateTime(2019, 2, 15),
+  DateTime(2019, 2, 11),
+  DateTime(2019, 2, 15),
 ];
 List<DateTime> absentDates = [
   DateTime(2019, 2, 2),
@@ -29,6 +31,8 @@ List<DateTime> absentDates = [
   DateTime(2019, 2, 13),
   DateTime(2019, 2, 14),
   DateTime(2019, 2, 16),
+  DateTime(2019, 2, 17),
+  DateTime(2019, 2, 18),
   DateTime(2019, 2, 17),
   DateTime(2019, 2, 18),
 ];
@@ -69,88 +73,12 @@ class _CalendarPage2State extends State<CalendarPage2> {
       );
 
   EventList<Event> _markedDateMap = new EventList<Event>(
-    events: {
-      absentDates[1]: [
-        Event(
-          date: absentDates[1],
-          title: 'Event 1',
-          icon: _absentIcon(
-            absentDates[1].day.toString(),
-          ),
-        ),
-      ],
-      absentDates[2]: [
-        Event(
-          date: absentDates[2],
-          title: 'Event 1',
-          icon: _absentIcon(
-            absentDates[2].day.toString(),
-          ),
-        ),
-      ],
-      absentDates[3]: [
-        Event(
-          date: absentDates[3],
-          title: 'Event 1',
-          icon: _absentIcon(
-            absentDates[3].day.toString(),
-          ),
-        ),
-      ],
-      absentDates[4]: [
-        Event(
-          date: absentDates[4],
-          title: 'Event 1',
-          icon: _absentIcon(
-            absentDates[4].day.toString(),
-          ),
-        ),
-      ],
-      absentDates[5]: [
-        Event(
-          date: absentDates[5],
-          title: 'Event 1',
-          icon: _absentIcon(
-            absentDates[5].day.toString(),
-          ),
-        ),
-      ],
-
-      // present
-
-      presentDates[1]: [
-        Event(
-          date: presentDates[1],
-          title: "Event",
-          icon: _presentIcon(
-            presentDates[1].day.toString(),
-          ),
-        ),
-      ],
-      presentDates[2]: [
-        Event(
-          date: presentDates[2],
-          title: "Event",
-          icon: _presentIcon(
-            presentDates[2].day.toString(),
-          ),
-        ),
-      ],
-      presentDates[3]: [
-        Event(
-          date: presentDates[3],
-          title: "Event",
-          icon: _presentIcon(
-            presentDates[3].day.toString(),
-          ),
-        ),
-      ],
-    },
+    events: {},
   );
 
   CalendarCarousel _calendarCarouselNoHeader;
 
-  var len = 4;
+  var len = 9;
   double cHeight;
 
   @override
@@ -158,33 +86,37 @@ class _CalendarPage2State extends State<CalendarPage2> {
     cHeight = MediaQuery.of(context).size.height;
     for (int i = 0; i < len; i++) {
       _markedDateMap.add(
-        presentDates[4 + i],
+        presentDates[i],
         new Event(
-          date: presentDates[4 + i],
+          date: presentDates[i],
           title: 'Event 5',
           icon: _presentIcon(
-            presentDates[4 + i].day.toString(),
+            presentDates[i].day.toString(),
           ),
         ),
       );
+
+      for (int i = 0; i < len; i++) {
+        _markedDateMap.add(
+          absentDates[i],
+          new Event(
+            date: absentDates[i],
+            title: 'Event 5',
+            icon: _absentIcon(
+              absentDates[i].day.toString(),
+            ),
+          ),
+        );
+      }
     }
 
     _calendarCarouselNoHeader = CalendarCarousel<Event>(
-      onDayPressed: (DateTime date, List<Event> events) {
-        this.setState(() => _currentDate2 = date);
-        events.forEach((event) => print(event.title));
-      },
+      height: cHeight * 0.54,
       weekendTextStyle: TextStyle(
         color: Colors.red,
       ),
       todayButtonColor: Colors.blue[200],
-      todayBorderColor: Colors.red[900],
-      selectedDayBorderColor: Colors.grey[600],
-      selectedDayButtonColor: Colors.grey[400],
-      thisMonthDayBorderColor: Colors.grey,
       markedDatesMap: _markedDateMap,
-      height: cHeight * 0.54,
-      selectedDateTime: _currentDate2,
       markedDateShowIcon: true,
       markedDateIconMaxShown: 1,
       markedDateMoreShowTotal:
