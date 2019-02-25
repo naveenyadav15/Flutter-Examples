@@ -1,7 +1,5 @@
 import 'package:calender_check/example.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_google_map_route/map_screen.dart';
-// import 'package:map_view/map_view.dart';
 
 void main() {
   runApp(new MaterialApp(
