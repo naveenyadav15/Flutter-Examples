@@ -94,7 +94,7 @@ class _CalendarPage2State extends State<CalendarPage2> {
             presentDates[i].day.toString(),
           ),
         ),
-      );
+      );}
 
       for (int i = 0; i < len; i++) {
         _markedDateMap.add(
@@ -108,7 +108,7 @@ class _CalendarPage2State extends State<CalendarPage2> {
           ),
         );
       }
-    }
+    
 
     _calendarCarouselNoHeader = CalendarCarousel<Event>(
       height: cHeight * 0.54,
