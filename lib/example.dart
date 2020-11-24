@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
@@ -11,63 +13,49 @@ class CalendarPage2 extends StatefulWidget {
 }
 
 List<DateTime> presentDates = [
-  DateTime(2019, 2, 1),
-  DateTime(2019, 2, 3),
-  DateTime(2019, 2, 4),
-  DateTime(2019, 2, 5),
-  DateTime(2019, 2, 6),
-  DateTime(2019, 2, 9),
-  DateTime(2019, 2, 10),
-  DateTime(2019, 2, 11),
-  DateTime(2019, 2, 15),
-  DateTime(2019, 2, 11),
-  DateTime(2019, 2, 15),
+  DateTime(2020, 11, 1),
+  DateTime(2020, 11, 3),
+  DateTime(2020, 11, 4),
+  DateTime(2020, 11, 5),
+  DateTime(2020, 11, 6),
+  DateTime(2020, 11, 9),
+  DateTime(2020, 11, 10),
+  DateTime(2020, 11, 11),
+  DateTime(2020, 11, 15),
+  DateTime(2020, 11, 22),
+  DateTime(2020, 11, 23),
 ];
 List<DateTime> absentDates = [
-  DateTime(2019, 2, 2),
-  DateTime(2019, 2, 7),
-  DateTime(2019, 2, 8),
-  DateTime(2019, 2, 12),
-  DateTime(2019, 2, 13),
-  DateTime(2019, 2, 14),
-  DateTime(2019, 2, 16),
-  DateTime(2019, 2, 17),
-  DateTime(2019, 2, 18),
-  DateTime(2019, 2, 17),
-  DateTime(2019, 2, 18),
+  DateTime(2020, 11, 2),
+  DateTime(2020, 11, 7),
+  DateTime(2020, 11, 8),
+  DateTime(2020, 11, 12),
+  DateTime(2020, 11, 13),
+  DateTime(2020, 11, 14),
+  DateTime(2020, 11, 16),
+  DateTime(2020, 11, 17),
+  DateTime(2020, 11, 18),
+  DateTime(2020, 11, 19),
+  DateTime(2020, 11, 20),
 ];
 
 class _CalendarPage2State extends State<CalendarPage2> {
   DateTime _currentDate2 = DateTime.now();
-  static Widget _presentIcon(String day) => Container(
-        decoration: BoxDecoration(
-          color: Colors.green,
-          borderRadius: BorderRadius.all(
-            Radius.circular(1000),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            day,
-            style: TextStyle(
-              color: Colors.black,
-            ),
+  static Widget _presentIcon(String day) => CircleAvatar(
+        backgroundColor: Colors.green,
+        child: Text(
+          day,
+          style: TextStyle(
+            color: Colors.black,
           ),
         ),
       );
-  static Widget _absentIcon(String day) => Container(
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.all(
-            Radius.circular(1000),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            day,
-            style: TextStyle(
-              color: Colors.black,
-            ),
+  static Widget _absentIcon(String day) => CircleAvatar(
+        backgroundColor: Colors.red,
+        child: Text(
+          day,
+          style: TextStyle(
+            color: Colors.black,
           ),
         ),
       );
@@ -78,7 +66,7 @@ class _CalendarPage2State extends State<CalendarPage2> {
 
   CalendarCarousel _calendarCarouselNoHeader;
 
-  var len = 9;
+  var len = min(absentDates?.length, presentDates.length);
   double cHeight;
 
   @override
@@ -94,21 +82,21 @@ class _CalendarPage2State extends State<CalendarPage2> {
             presentDates[i].day.toString(),
           ),
         ),
-      );}
+      );
+    }
 
-      for (int i = 0; i < len; i++) {
-        _markedDateMap.add(
-          absentDates[i],
-          new Event(
-            date: absentDates[i],
-            title: 'Event 5',
-            icon: _absentIcon(
-              absentDates[i].day.toString(),
-            ),
+    for (int i = 0; i < len; i++) {
+      _markedDateMap.add(
+        absentDates[i],
+        new Event(
+          date: absentDates[i],
+          title: 'Event 5',
+          icon: _absentIcon(
+            absentDates[i].day.toString(),
           ),
-        );
-      }
-    
+        ),
+      );
+    }
 
     _calendarCarouselNoHeader = CalendarCarousel<Event>(
       height: cHeight * 0.54,
